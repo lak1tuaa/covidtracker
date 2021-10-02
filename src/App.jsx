@@ -6,8 +6,6 @@ import USHeatMap from './components/USHeatMap';
 import { fetchUSCovidData, fetchUSStateData, fetchUSTimeSeriesData } from './api/CovidAPI';
 import * as d3 from 'd3';
 
-console.log(process.env.REACT_APP_API_KEY);
-
 const parseDate = d3.timeParse("%Y-%m-%d");
 
 function calculateRollingAverage(data, key, start, end){

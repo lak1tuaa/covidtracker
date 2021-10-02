@@ -14,9 +14,9 @@ function HeatMapLegend() {
             <svg width={leftMargin + width * colors.length + rightMargin} height={height + 30}>
                 {colors.map((d,i) =>{
                     return ([
-                        <rect x={leftMargin + width*i} width={width} height="10" fill={d} />,
-                        <line x1={leftMargin + width*i} x2={leftMargin+width*i} y1="0" y2="13" stroke="black" />,
-                        <text x={leftMargin - textCorrectionX + width*i} y={textHeight} className="legendtext">0</text> 
+                        <rect key={"rect" + i} x={leftMargin + width*i} width={width} height="10" fill={d} />,
+                        <line key={"line" + i} x1={leftMargin + width*i} x2={leftMargin+width*i} y1="0" y2="13" stroke="black" />,
+                        <text key={"text" + i} x={leftMargin - textCorrectionX + width*i} y={textHeight} className="legendtext">0</text> 
                     ])
                 })}
                 <line x1={leftMargin + width*colors.length} x2={leftMargin+width*colors.length} y1="0" y2="13" stroke="black" />                
