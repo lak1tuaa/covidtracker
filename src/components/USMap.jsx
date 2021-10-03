@@ -3,18 +3,6 @@ import './style/usmap.css';
 import USMapState from './USMapState';
 
 function USMap(props) {
-  
-  // const statePath = props.geoJsonData.features.map(d => {
-  //   const stateabbr = stateToAbbr[d.properties.NAME]
-  //   const statedata = props.usstateinfo.find(state => state.state === stateabbr)
-  //   return {
-  //     "statename": d.properties.NAME,
-  //     "stateabbr":stateabbr,
-  //     "d": props.geoGenerator(d),
-  //     "statedata": statedata,
-  //   }
-  // });
-  
   return (
     <div className='usMapContainer' style={{width:800}}>
       <svg viewBox="50 0 900 500" >
@@ -26,6 +14,7 @@ function USMap(props) {
             d={d.d}
             statedata={d.statedata}
             heatMapView={props.heatMapView}
+            heatMapConfig={props.heatMapConfig}
             />
         })}
       </svg>

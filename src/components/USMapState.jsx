@@ -1,46 +1,25 @@
 import React from 'react';
-import {scaleLinear, scaleQuantize} from 'd3';
 
 
 function USMapState(props) {
     const heatMapView = props.heatMapView
-    
+    const heatMapConfig = props.heatMapConfig ? props.heatMapConfig : null;
+    const statedata = props.statedata ? props.statedata : null;
+
     function handleclick() {
         console.log(props.statedata.actuals.newCases / (props.statedata.population / 100000))
         console.log(props.statedata)
     }
-    const vaccinationScale = scaleLinear()
-        .range(['white','#002cff'])
-        .domain([0,1])
-    // const infectionsScale = scaleLinear()
-    //     .range(["#0ff702", "#ff0000"])
-    //     .domain([0,100])
-    // const icucapacityScale = scaleLinear()
-    //     .range(["#05ff04","#ff0000"])
-    //     .domain([0,1])
-    const infectionsScale = scaleQuantize()
-        .range(["#05ff04","#eaeb04","#ff6666","#eb1010","#8e0000"])
-        .domain([0,100])
-    const icucapacityScale = scaleQuantize()
-        .range(["#05ff04","#eaeb04","#ff6666","#eb1010","#8e0000"])
-        .domain([0,1])
 
-    function determineFill(){
-        if(props.statedata === undefined){
-            return "lightblue";
+    function determineFill(heatMapConfig, statedata){
+        if (!heatMapConfig || !statedata) return "lightblue"
+        
+        let value = heatMapConfig.dataAccessFunction(statedata)
+        let colorRange = heatMapConfig.colorRange
+        for (const elem of colorRange) {
+            if (value <= elem.range[1]) return elem.color 
         }
-
-        switch(heatMapView) {
-            case "vaccinations":
-                return vaccinationScale(props.statedata.metrics.vaccinationsCompletedRatio);
-            case "newcases":
-                const casesPer100k = props.statedata.actuals.newCases / (props.statedata.population / 100000)
-                return infectionsScale(casesPer100k)
-            case "icucapacity":
-                return icucapacityScale(props.statedata.metrics.icuCapacityRatio)
-            default:
-                return "lightblue"
-        }
+        return colorRange[colorRange.length - 1].color
     }
     
     return (
@@ -50,7 +29,7 @@ function USMapState(props) {
             stateabbr={props.stateabbr}
             d={props.d}
             onClick={() => handleclick()}
-            fill={determineFill()}
+            fill={determineFill(heatMapConfig, statedata)}
         />
     )
 }
