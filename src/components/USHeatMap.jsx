@@ -32,7 +32,6 @@ function USHeatMap(props) {
             <USHeatMapButtons setHeatMapView={setHeatMapView}/>
             <USMap 
                 usstateinfo={props.usstateinfo} 
-                heatMapView={heatMapView}
                 data={statePath}
                 heatMapConfig={heatMapConfigs[heatMapView]}
             />

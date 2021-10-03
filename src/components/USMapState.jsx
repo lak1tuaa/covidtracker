@@ -2,7 +2,6 @@ import React from 'react';
 
 
 function USMapState(props) {
-    const heatMapView = props.heatMapView
     const heatMapConfig = props.heatMapConfig ? props.heatMapConfig : null;
     const statedata = props.statedata ? props.statedata : null;
 

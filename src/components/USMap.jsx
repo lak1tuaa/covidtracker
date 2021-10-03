@@ -13,7 +13,6 @@ function USMap(props) {
             stateabbr={d.stateabbr}
             d={d.d}
             statedata={d.statedata}
-            heatMapView={props.heatMapView}
             heatMapConfig={props.heatMapConfig}
             />
         })}
