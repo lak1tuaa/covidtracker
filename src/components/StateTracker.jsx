@@ -1,4 +1,5 @@
 import React from 'react';
+import StateHeatMap from './StateHeatMap'
 import { useParams } from 'react-router-dom';
 import { abbrToState } from './maps/stateabbreviations';
 
@@ -14,6 +15,9 @@ function StateTracker() {
         <div>
             <h1>State Tracker page</h1>
             <p>{ stateName }</p>
+            <StateHeatMap 
+                state={abbr.toUpperCase()}
+            />
         </div>
     )
 }
