@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 
 function USMapState(props) {
@@ -22,14 +23,16 @@ function USMapState(props) {
     }
     
     return (
-        <path
-            className="usstate"
-            statename={props.statename}
-            stateabbr={props.stateabbr}
-            d={props.d}
-            onClick={() => handleclick()}
-            fill={determineFill(heatMapConfig, statedata)}
-        />
+        <Link to={`/state/${props.stateabbr}`}>
+            <path
+                className="usstate"
+                statename={props.statename}
+                stateabbr={props.stateabbr}
+                d={props.d}
+                onClick={() => handleclick()}
+                fill={determineFill(heatMapConfig, statedata)}
+            />
+        </Link>
     )
 }
 
