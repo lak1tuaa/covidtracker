@@ -1,6 +1,6 @@
 import React from 'react';
 
-function USHeatMapButtons(props) {
+function HeatMapButtons(props) {
     return (
         <div className="heatmap-btn-group">
             <button onClick={() => props.setHeatMapView("newcases")}>New Cases</button>
@@ -10,4 +10,4 @@ function USHeatMapButtons(props) {
     )
 }
 
-export default USHeatMapButtons
+export default HeatMapButtons
