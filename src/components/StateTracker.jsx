@@ -1,15 +1,13 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { abbrToState } from './maps/stateabbreviations';
-import { useEffect } from 'react/cjs/react.development';
 import { fetchStateTimeSeriesData, fetchStateData, fetchStateCounties } from '../api/CovidAPI';
 import StateHeatMap from './StateHeatMap'
 import QuickInfo from './QuickInfo';
+import LineBarGraph from './LineBarGraph';
 
-import{ timeParse } from 'd3';
-
-const parseDate = timeParse('%Y-%m-%d');
+import { addRollingAverageToTimeSeriesData, parseDate } from './common/lib';
 
 function StateTracker() {
     const [stateAbbr, setStateAbbr] = useState(useParams().abbr.toUpperCase());
@@ -22,11 +20,6 @@ function StateTracker() {
     const [lastUpdatedDate, setLastUpdatedDate] = useState();
     
     const stateName = abbrToState[stateAbbr];
-
-    // This is called a destructuring assignment. The function call to useParams() returns
-    // an object with { abbr: "the_abbr_from_the_url"}, and this shortens the syntax to
-    // assign abbr from:
-    // let abbr = useParams().abbr
     const { abbr } = useParams();
 
     useEffect(() => {
@@ -37,7 +30,6 @@ function StateTracker() {
     useEffect(() => {
         fetchStateData(stateAbbr)
             .then((d) => {
-                console.log(d)
                 setStateData(d);
                 setNewCases(d.actuals.newCases);
                 setVaccinations(d.actuals.vaccinationsInitiated);
@@ -45,7 +37,8 @@ function StateTracker() {
             });
         fetchStateTimeSeriesData(stateAbbr)
             .then((d) => {
-                setStateTimeSeriesData(d);
+                addRollingAverageToTimeSeriesData(d.actualsTimeseries)
+                setStateTimeSeriesData(d.actualsTimeseries);
             });
         fetchStateCounties(stateAbbr)
             .then((d) => {
@@ -66,6 +59,7 @@ function StateTracker() {
                 state={stateAbbr}
                 stateCountiesData={stateCountiesData}
             />
+            <LineBarGraph width={600} height={400} data={stateTimeSeriesData} id={"svgGraph02"}/>
         </div>
     )
 }

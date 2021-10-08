@@ -1,9 +1,8 @@
 import React from 'react';
 
 function QuickInfo(props) {
-    console.log(props.lastUpdatedDate)
     const lastUpdatedDate = props.lastUpdatedDate ? props.lastUpdatedDate: new Date();
-    const formattedDate = `${lastUpdatedDate.getMonth() + 1}/${lastUpdatedDate.getDate()}/${lastUpdatedDate.getFullYear()}`
+    const formattedDate = `${lastUpdatedDate.getMonth() + 1}/${lastUpdatedDate.getDate()}/${lastUpdatedDate.getFullYear()}`;
     return (
         <div>
             <p>

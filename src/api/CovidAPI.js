@@ -31,7 +31,7 @@ export function fetchStateData(stateAbbr){
 }
 
 export function fetchStateTimeSeriesData(stateAbbr){
-    return fetchData(`https://api.covidactnow.org/v2/state/${stateAbbr}.json?apiKey=${apiKey}`);
+    return fetchData(`https://api.covidactnow.org/v2/state/${stateAbbr}.timeseries.json?apiKey=${apiKey}`);
 }
 
 export function fetchStateCounties(stateAbbr){

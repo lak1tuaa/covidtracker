@@ -4,19 +4,7 @@ import USStateTable from './USStateTable';
 import LineBarGraph from './LineBarGraph';
 import USHeatMap from './USHeatMap';
 import { fetchUSCovidData, fetchUSStateData, fetchUSTimeSeriesData } from '../api/CovidAPI';
-import { timeParse } from 'd3';
-
-const parseDate = timeParse("%Y-%m-%d");
-
-function calculateRollingAverage(data, key, start, end){
-  let sum = 0;
-  for(var i = start; i <= end; i++) {
-      if(data[i][key]){
-          sum += data[i][key]
-      }
-  }
-  return sum / (end - start + 1)
-}
+import { addRollingAverageToTimeSeriesData, parseDate } from './common/lib';
 
 function USTracker() {
   const [newCases, setNewCases] = useState(0);
@@ -26,7 +14,6 @@ function USTracker() {
   const [stateInfo, setStateInfo] = useState([])
   const [usTimeSeriesData, setUsTimeSeriesData] = useState([])
 
-
   useEffect(() => {
     fetchUSCovidData()
       .then(data => {
@@ -34,28 +21,13 @@ function USTracker() {
         setVaccinations(data.actuals.vaccinationsInitiated);
         setLastUpdatedDate(parseDate(data.lastUpdatedDate));
       })
-  }, []);
-
-  useEffect(() => {
-    fetchUSStateData()
-      .then(data => setStateInfo(data))
-  }, []);
-
-  useEffect(() => {
     fetchUSTimeSeriesData()
       .then(data => {
-        let timeSeriesData = data.actualsTimeseries;
-        timeSeriesData.map((d,i) => {
-          d.date = parseDate(d.date);
-          let rollingAverage = null;
-          if (i >= 6) {
-            rollingAverage = calculateRollingAverage(timeSeriesData, "newCases", i - 6, i)
-          }
-          d.rollingAverage = rollingAverage;
-          return d;
-        })
+        addRollingAverageToTimeSeriesData(data.actualsTimeseries)
         setUsTimeSeriesData(data.actualsTimeseries)
       })
+    fetchUSStateData()
+      .then(data => setStateInfo(data))
   }, []);
   
   return (
