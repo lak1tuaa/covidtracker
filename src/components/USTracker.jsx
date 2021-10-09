@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import QuickInfo from './QuickInfo';
-import USStateTable from './USStateTable';
 import LineBarGraph from './LineBarGraph';
 import USHeatMap from './USHeatMap';
 import { fetchUSCovidData, fetchUSStateData, fetchUSTimeSeriesData } from '../api/CovidAPI';
@@ -38,7 +37,6 @@ function USTracker() {
       <QuickInfo vaccinations={vaccinations} newcases={newCases} lastUpdatedDate={lastUpdatedDate}/>
       <USHeatMap usstateinfo={stateInfo}/>
       <LineBarGraph width={600} height={400} data={usTimeSeriesData} id={"svgGraph01"}/>
-      {/* <USStateTable usstateinfo={stateInfo}/> */}
       <SortableTable
         data={stateInfo}
         config={tableConfig}
