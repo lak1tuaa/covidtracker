@@ -8,6 +8,7 @@ import QuickInfo from './QuickInfo';
 import LineBarGraph from './LineBarGraph';
 
 import { addRollingAverageToTimeSeriesData, parseDate } from './common/lib';
+import SortableTable from './SortableTable';
 
 function StateTracker() {
     const [stateAbbr, setStateAbbr] = useState(useParams().abbr.toUpperCase());
@@ -25,7 +26,7 @@ function StateTracker() {
     useEffect(() => {
         const upperAbbr = abbr.toUpperCase();
         setStateAbbr(upperAbbr);
-    })
+    }, [abbr])
 
     useEffect(() => {
         fetchStateData(stateAbbr)
@@ -60,8 +61,40 @@ function StateTracker() {
                 stateCountiesData={stateCountiesData}
             />
             <LineBarGraph width={600} height={400} data={stateTimeSeriesData} id={"svgGraph02"}/>
+            <SortableTable
+                data={stateCountiesData}
+                config={tableConfig}
+            />
         </div>
     )
 }
+
+const tableConfig = [
+    {
+        colName:"Name",
+        dataAccess:(d) => d.county,
+        sortFunction: (a, b) => {
+            if(a.county < b.county) return -1;
+            if(a.county > b.county) return 1;
+            return 0;
+        },
+        // sortFunction: (a, b) => a.fips - b.fips,
+    },
+    {
+        colName:"New Cases",
+        dataAccess:(d) => d.actuals.newCases,
+        sortFunction: (a, b) => b.actuals.newCases - a.actuals.newCases,
+    },
+    {
+        colName:"Vaccinations",
+        dataAccess:(d) => d.actuals.vaccinationsInitiated,
+        sortFunction: (a, b) => b.actuals.vaccinationsInitiated - a.actuals.vaccinationsInitiated,
+    },
+    {
+        colName:"Deaths",
+        dataAccess:(d) => d.actuals.deaths,
+        sortFunction:(a, b) => b.actuals.deaths - a.actuals.deaths,
+    }
+]
 
 export default StateTracker;

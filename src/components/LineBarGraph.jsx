@@ -10,7 +10,6 @@ function LineBarGraph(props) {
     //const formatTime = d3.timeFormat("%Y-%m-%d");    
 
     useEffect(() => {
-        console.log(data)
         const recentData = data.slice(Math.max(data.length - mostRecent, 0));
 
         const svg = d3.select(`#${props.id}`);
