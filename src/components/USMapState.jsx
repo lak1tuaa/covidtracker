@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import './style/usmap.css';
 
 
 function USMapState(props) {
@@ -22,6 +23,11 @@ function USMapState(props) {
         return colorRange[colorRange.length - 1].color
     }
     
+    function toolTip(e) {
+        const elem = e.target
+        console.log(elem.getBoundingClientRect())
+    }
+
     return (
         <Link to={`/state/${props.stateabbr}`}>
             <path
@@ -31,6 +37,7 @@ function USMapState(props) {
                 d={props.d}
                 onClick={() => handleclick()}
                 fill={determineFill(heatMapConfig, statedata)}
+                onMouseEnter={(e) => toolTip(e)}
             />
         </Link>
     )

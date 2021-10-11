@@ -4,4 +4,12 @@
 .usstate{
     /* fill:lightblue; */
     stroke:grey;
+    stroke-width:2;
+    /* stroke-opacity:0; */
+    /* shape-rendering:crispEdges; */
 }
+/* .usstate:hover {
+    stroke:black;
+    stroke:black;
+    stroke-opacity:1;
+} */
