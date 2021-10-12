@@ -10,7 +10,7 @@ function HeatMapLegend(props) {
 
     const width = 300;
     const height = 10;
-    const leftMargin = 350;
+    const leftMargin = props.leftMargin;
     const rightMargin = 25;
     const textCorrectionX = 3
     const tickLength = 13

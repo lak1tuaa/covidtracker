@@ -37,6 +37,7 @@ function USHeatMap(props) {
                 heatMapConfig={heatMapConfigs[heatMapView]}
             />
             <HeatMapLegend
+                leftMargin={350}
                 heatMapConfig={heatMapConfigs[heatMapView]}    
             />
         </div>

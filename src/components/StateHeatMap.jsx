@@ -62,6 +62,7 @@ function StateHeatMap(props) {
                 heatMapConfig={heatMapConfigs[heatMapView]}
             />
             <HeatMapLegend
+                leftMargin={100}
                 heatMapConfig={heatMapConfigs[heatMapView]}
             />
         </div>
