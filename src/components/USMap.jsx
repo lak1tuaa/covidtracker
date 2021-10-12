@@ -1,6 +1,7 @@
 import React from 'react';
 import './style/usmap.css';
 import USMapState from './USMapState';
+import ReactTooltip from 'react-tooltip';
 
 function USMap(props) {
   return (
@@ -17,6 +18,10 @@ function USMap(props) {
             />
         })}
       </svg>
+      <ReactTooltip 
+        id="svgTooltip" 
+        multiline={true}  
+      />
     </div>
   )
 }
