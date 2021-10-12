@@ -5,6 +5,7 @@ import HeatMapLegend from './HeatMapLegend';
 import { geoAlbersUsa, geoPath } from 'd3';
 import { stateToAbbr } from './maps/stateabbreviations';
 import { heatMapConfigs } from './config/heatmapconfig';
+import './style/heatmap.css'
 
 function USHeatMap(props) {
     const [heatMapView, setHeatMapView] = useState('newcases')
@@ -29,17 +30,22 @@ function USHeatMap(props) {
     });
 
     return (
-        <div>
-            <HeatMapButtons setHeatMapView={setHeatMapView}/>
-            <USMap 
-                usstateinfo={props.usstateinfo} 
-                data={statePath}
-                heatMapConfig={heatMapConfigs[heatMapView]}
+        <div className="container center">
+            <HeatMapButtons 
+                setHeatMapView={setHeatMapView}
+                heatMapView={heatMapView}
             />
-            <HeatMapLegend
-                leftMargin={350}
-                heatMapConfig={heatMapConfigs[heatMapView]}    
-            />
+            <div className="center">
+                <USMap 
+                    usstateinfo={props.usstateinfo} 
+                    data={statePath}
+                    heatMapConfig={heatMapConfigs[heatMapView]}
+                />
+                <HeatMapLegend
+                    leftMargin={10}
+                    heatMapConfig={heatMapConfigs[heatMapView]}    
+                />
+            </div>
         </div>
     )
 }

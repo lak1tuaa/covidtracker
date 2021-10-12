@@ -7,17 +7,18 @@ import StateHeatMap from './StateHeatMap'
 import QuickInfo from './QuickInfo';
 import LineBarGraph from './LineBarGraph';
 
-import { addRollingAverageToTimeSeriesData, parseDate } from './common/lib';
+import { addRollingAverageToTimeSeriesData, parseDate, numberWithCommas } from './common/lib';
 import SortableTable from './SortableTable';
+import './style/tracker.css';
 
 function StateTracker() {
     const [stateAbbr, setStateAbbr] = useState(useParams().abbr.toUpperCase());
-    //const [stateData, setStateData] = useState([]);
     const [stateTimeSeriesData, setStateTimeSeriesData] = useState([]);
     const [stateCountiesData, setStateCountiesData] = useState([]);
 
     const [newCases, setNewCases] = useState(0);
     const [vaccinations, setVaccinations] = useState(0);
+    const [icuCapacity, setIcuCapacity] = useState(0);
     const [lastUpdatedDate, setLastUpdatedDate] = useState();
     
     const stateName = abbrToState[stateAbbr];
@@ -31,9 +32,9 @@ function StateTracker() {
     useEffect(() => {
         fetchStateData(stateAbbr)
             .then((d) => {
-                //setStateData(d);
                 setNewCases(d.actuals.newCases);
                 setVaccinations(d.actuals.vaccinationsInitiated);
+                setIcuCapacity(d.metrics.icuCapacityRatio);
                 setLastUpdatedDate(parseDate(d.lastUpdatedDate));
             });
         fetchStateTimeSeriesData(stateAbbr)
@@ -48,13 +49,13 @@ function StateTracker() {
     }, [stateAbbr]);
 
     return (
-        <div>
-            <h1>State Tracker page</h1>
-            <p>{ stateName }</p>
+        <div className="container">
+            <h1 className="title">{stateName} COVID-19 Tracker</h1>
             <QuickInfo 
                 lastUpdatedDate={lastUpdatedDate}
                 vaccinations={vaccinations}
                 newcases={newCases}
+                icucapacity={icuCapacity}
             />
             <StateHeatMap 
                 state={stateAbbr}
@@ -82,17 +83,17 @@ const tableConfig = [
     },
     {
         colName:"New Cases",
-        dataAccess:(d) => d.actuals.newCases,
+        dataAccess:(d) => numberWithCommas(d.actuals.newCases),
         sortFunction: (a, b) => b.actuals.newCases - a.actuals.newCases,
     },
     {
         colName:"Vaccinations",
-        dataAccess:(d) => d.actuals.vaccinationsInitiated,
+        dataAccess:(d) => numberWithCommas(d.actuals.vaccinationsInitiated),
         sortFunction: (a, b) => b.actuals.vaccinationsInitiated - a.actuals.vaccinationsInitiated,
     },
     {
         colName:"Deaths",
-        dataAccess:(d) => d.actuals.deaths,
+        dataAccess:(d) => numberWithCommas(d.actuals.deaths),
         sortFunction:(a, b) => b.actuals.deaths - a.actuals.deaths,
     }
 ]

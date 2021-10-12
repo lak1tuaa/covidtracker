@@ -1,0 +1,13 @@
+.center{
+    text-align: center;
+}
+.quick-info-div{
+    display:inline-block;
+    text-align:left;
+}
+.info-name{
+    font-weight: bold;
+}
+.info-text{
+    font-size:20px;
+}

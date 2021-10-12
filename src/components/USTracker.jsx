@@ -3,13 +3,15 @@ import QuickInfo from './QuickInfo';
 import LineBarGraph from './LineBarGraph';
 import USHeatMap from './USHeatMap';
 import { fetchUSCovidData, fetchUSStateData, fetchUSTimeSeriesData } from '../api/CovidAPI';
-import { addRollingAverageToTimeSeriesData, parseDate } from './common/lib';
+import { addRollingAverageToTimeSeriesData, parseDate, numberWithCommas } from './common/lib';
 import { abbrToState } from './maps/stateabbreviations';
 import SortableTable from './SortableTable';
+import './style/tracker.css';
 
 function USTracker() {
   const [newCases, setNewCases] = useState(0);
   const [vaccinations, setVaccinations] = useState(0);
+  const [icuCapacity, setIcuCapacity] = useState(0);
   const [lastUpdatedDate, setLastUpdatedDate] = useState();
 
   const [stateInfo, setStateInfo] = useState([])
@@ -20,6 +22,7 @@ function USTracker() {
       .then(data => {
         setNewCases(data.actuals.newCases);
         setVaccinations(data.actuals.vaccinationsInitiated);
+        setIcuCapacity(data.metrics.icuCapacityRatio);
         setLastUpdatedDate(parseDate(data.lastUpdatedDate));
       })
     fetchUSTimeSeriesData()
@@ -32,9 +35,14 @@ function USTracker() {
   }, []);
   
   return (
-    <div className="App">
-      <h1>United States COVID-19 Tracker</h1>
-      <QuickInfo vaccinations={vaccinations} newcases={newCases} lastUpdatedDate={lastUpdatedDate}/>
+    <div className="container">
+      <h1 className="title">United States COVID-19 Tracker</h1>
+      <QuickInfo 
+        vaccinations={vaccinations} 
+        newcases={newCases}
+        icucapacity={icuCapacity} 
+        lastUpdatedDate={lastUpdatedDate}
+      />
       <USHeatMap usstateinfo={stateInfo}/>
       <LineBarGraph width={600} height={400} data={usTimeSeriesData} id={"svgGraph01"}/>
       <SortableTable
@@ -59,17 +67,17 @@ const tableConfig = [
   },
   {
     colName:"New Cases",
-    dataAccess:(d) => d.actuals.newCases,
+    dataAccess:(d) => numberWithCommas(d.actuals.newCases),
     sortFunction: (a, b) => b.actuals.newCases - a.actuals.newCases,
   },
   {
       colName:"Vaccinations",
-      dataAccess:(d) => d.actuals.vaccinationsInitiated,
+      dataAccess:(d) => numberWithCommas(d.actuals.vaccinationsInitiated),
       sortFunction: (a, b) => b.actuals.vaccinationsInitiated - a.actuals.vaccinationsInitiated,
   },
   {
       colName:"Deaths",
-      dataAccess:(d) => d.actuals.deaths,
+      dataAccess:(d) => numberWithCommas(d.actuals.deaths),
       sortFunction:(a, b) => b.actuals.deaths - a.actuals.deaths,
   }
 ];

@@ -6,17 +6,19 @@ import StateTracker from './components/StateTracker';
 
 function App() {
   return (
-    <Router>
-      <Switch>
-        <Route path="/state/:abbr">
-          <StateTracker />
-        </Route>
-        <Route path="/">
-          <USTracker />
-        </Route>
-      </Switch>
-    </Router>
-  )  
+    <div className="container">
+      <Router>
+        <Switch>
+          <Route path="/state/:abbr">
+            <StateTracker />
+          </Route>
+          <Route path="/">
+            <USTracker />
+          </Route>
+        </Switch>
+      </Router>
+    </div>
+    )  
 }
 
 export default App;

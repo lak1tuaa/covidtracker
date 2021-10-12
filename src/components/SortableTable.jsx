@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './style/sortabletable.css';
 
 function SortableTable(props){
     const [sortBy, setSortBy] = useState(0);
@@ -16,14 +17,26 @@ function SortableTable(props){
     }
 
     return (
-        <div>
-            <table>
+        <div className="container sortableTable-div">
+            <table className="table table-striped table-hover table-bordered table-sm">
                 <thead>
                     <tr>
                         {props.config.map((colConfig,i) => {
+                            let headerSort = "bi bi-caret-up";
+                            if(i === sortBy){
+                                if(highToLow){
+                                    headerSort = "bi bi-caret-up-fill"
+                                }else{
+                                    headerSort = "bi bi-caret-down-fill"
+                                }
+                            }
                             return (
-                                <th key={i} onClick={() => sortDataBy(i)}>
+                                <th 
+                                    key={i} 
+                                    onClick={() => sortDataBy(i)}
+                                >
                                     {colConfig.colName}
+                                    <i className={headerSort}></i>
                                 </th>
                             )
                         })}
