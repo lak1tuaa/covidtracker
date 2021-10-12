@@ -9,7 +9,7 @@ function USMap(props) {
         {props.data.map((d,i) => {
           return <USMapState 
             key={i} 
-            statename={d.state}
+            statename={d.statename}
             stateabbr={d.stateabbr}
             d={d.d}
             statedata={d.statedata}

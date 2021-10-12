@@ -11,6 +11,11 @@ export const heatMapConfigs = {
         openEnded:true,
         tickFormat: (v) => v,
         dataAccessFunction: (d) => d.actuals.newCases / (d.population / 100000),
+        tooltipName:"New Cases (per 100k)",
+        getTooltipInfo:(d) => {
+            let cases = d.actuals.newCases / (d.population/100000);
+            return "New Cases (per 100k): " + Math.round(cases);
+        }
     },
     vaccinations: {
         domain: [0, 1],
@@ -24,6 +29,8 @@ export const heatMapConfigs = {
         openEnded:false,
         tickFormat: (v) => v * 100 + "%",
         dataAccessFunction: (d) => d.metrics.vaccinationsCompletedRatio,
+        tooltipName:"Total Vaccinations",
+        getTooltipInfo:(d) => "Vaccination Progress: " + Math.round(d.metrics.vaccinationsCompletedRatio * 100) + "%",
     },
     icucapacity: {
         domain: [0.6, 1],
@@ -36,5 +43,7 @@ export const heatMapConfigs = {
         openEnded:false,
         tickFormat: (v) => v * 100 + "%",
         dataAccessFunction: (d) => d.metrics.icuCapacityRatio,
+        tooltipName:"ICU Capacity",
+        getTooltipInfo:(d) => "ICU Capacity: " + Math.round(d.metrics.icuCapacityRatio * 100) + "%",
     }
 }
