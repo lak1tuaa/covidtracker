@@ -19,7 +19,7 @@ function USMap(props) {
         })}
       </svg>
       <ReactTooltip 
-        id="svgTooltip" 
+        id="svgTooltipUS" 
         multiline={true}  
       />
     </div>

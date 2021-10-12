@@ -22,7 +22,7 @@ function USMapState(props) {
         <Link to={`/state/${props.stateabbr}`}>
             <path
                 data-tip={props.statename + "<br />" + toolTipInfo}
-                data-for="svgTooltip"
+                data-for="svgTooltipUS"
                 className="usstate"
                 statename={props.statename}
                 stateabbr={props.stateabbr}

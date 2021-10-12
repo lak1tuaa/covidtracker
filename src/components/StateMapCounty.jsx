@@ -3,6 +3,8 @@ import React from 'react';
 function StateMapCounty(props) {
     const heatMapConfig = props.heatMapConfig ? props.heatMapConfig : null;
     const countydata = props.countydata ? props.countydata : null;
+    const toolTipInfo = props.heatMapConfig && props.countydata ? props.heatMapConfig.getTooltipInfo(props.countydata) : "";
+
 
     function handleclick() {
         console.log(props.countyname);
@@ -22,6 +24,8 @@ function StateMapCounty(props) {
 
     return (
         <path
+            data-tip={props.countyname + "<br />" + toolTipInfo}
+            data-for="svgTooltipState"
             d={props.d}
             countyname={props.countyname}
             onClick={() => handleclick()}

@@ -1,8 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import StateMapCounty from './StateMapCounty';
+import ReactTooltip from 'react-tooltip';
 
 function StateMap(props) {
+    useEffect(() => {
+        ReactTooltip.rebuild();
+    })
     return (
         <div style={{width:400}}>
             <svg id="stateSVG" viewBox="50 0 900 500">
@@ -35,6 +39,10 @@ function StateMap(props) {
                     })}
                 </g>
             </svg>
+            <ReactTooltip
+                id="svgTooltipState"
+                multiline={true}
+            />
         </div>
     )
 }
