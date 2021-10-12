@@ -12,7 +12,7 @@ import SortableTable from './SortableTable';
 
 function StateTracker() {
     const [stateAbbr, setStateAbbr] = useState(useParams().abbr.toUpperCase());
-    const [stateData, setStateData] = useState([]);
+    //const [stateData, setStateData] = useState([]);
     const [stateTimeSeriesData, setStateTimeSeriesData] = useState([]);
     const [stateCountiesData, setStateCountiesData] = useState([]);
 
@@ -31,7 +31,7 @@ function StateTracker() {
     useEffect(() => {
         fetchStateData(stateAbbr)
             .then((d) => {
-                setStateData(d);
+                //setStateData(d);
                 setNewCases(d.actuals.newCases);
                 setVaccinations(d.actuals.vaccinationsInitiated);
                 setLastUpdatedDate(parseDate(d.lastUpdatedDate));
