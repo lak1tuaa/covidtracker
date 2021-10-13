@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import * as d3 from 'd3';
+import './style/linebargraph.css'
 
 const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
@@ -52,6 +53,7 @@ function LineBarGraph(props) {
             .attr("y", d => yScale(d.newCases))
             .attr("width", xScale.bandwidth())
             .attr("height", d =>  d.newCases ? height - yScale(d.newCases) : height - yScale(0))
+            .attr("fill","lightgrey")
         //TODO: add tooltip
         //TODO: add css file
         
@@ -67,11 +69,17 @@ function LineBarGraph(props) {
     });
     
     return (
-        <svg 
-            width={props.width}
-            height={props.height}
-            id={props.id}
-        ></svg>
+        <div>
+            <div className="line-bar-graph-div" style={{width:props.width}}>
+                <h3 className="center">{props.name} COVID-19 New Cases</h3>
+                <h5 className="center">7-Day Rolling Average</h5>
+                <svg 
+                    width={props.width}
+                    height={props.height}
+                    id={props.id}
+                ></svg>
+            </div>
+        </div>
     )
 }
 

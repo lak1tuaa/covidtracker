@@ -44,7 +44,13 @@ function USTracker() {
         lastUpdatedDate={lastUpdatedDate}
       />
       <USHeatMap usstateinfo={stateInfo}/>
-      <LineBarGraph width={600} height={400} data={usTimeSeriesData} id={"svgGraph01"}/>
+      <LineBarGraph 
+        width={600} 
+        height={400} 
+        data={usTimeSeriesData}
+        name={"United States"} 
+        id={"svgGraph01"}
+      />
       <SortableTable
         data={stateInfo}
         config={tableConfig}

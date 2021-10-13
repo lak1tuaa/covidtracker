@@ -10,6 +10,7 @@ import LineBarGraph from './LineBarGraph';
 import { addRollingAverageToTimeSeriesData, parseDate, numberWithCommas } from './common/lib';
 import SortableTable from './SortableTable';
 import './style/tracker.css';
+import { propTypes } from 'react-bootstrap/esm/Image';
 
 function StateTracker() {
     const [stateAbbr, setStateAbbr] = useState(useParams().abbr.toUpperCase());
@@ -61,7 +62,13 @@ function StateTracker() {
                 state={stateAbbr}
                 stateCountiesData={stateCountiesData}
             />
-            <LineBarGraph width={600} height={400} data={stateTimeSeriesData} id={"svgGraph02"}/>
+            <LineBarGraph 
+                width={600} 
+                height={400} 
+                data={stateTimeSeriesData}
+                name={stateName}
+                id={"svgGraph02"}
+            />
             <SortableTable
                 data={stateCountiesData}
                 config={tableConfig}

@@ -4,3 +4,8 @@
 .map{
     display:inline-block;
 }
+.map-container{
+    width:800px;
+    margin:0 auto;
+    margin-top:20px;
+}

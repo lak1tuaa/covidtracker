@@ -7,7 +7,7 @@ import HeatMapButtons from './HeatMapButtons';
 import StateMap from './StateMap';
 import HeatMapLegend from './HeatMapLegend';
 import { heatMapConfigs } from './config/heatmapconfig';
-
+import './style/heatmap.css';
 
 function StateHeatMap(props) {
     const [heatMapView, setHeatMapView] = useState('newcases');
@@ -52,19 +52,22 @@ function StateHeatMap(props) {
     
     
     return (
-        <div>
+        <div className="container center">
             <HeatMapButtons
                 setHeatMapView={setHeatMapView}
+                heatMapView={heatMapView}
             />
-            <StateMap 
-                statePaths={statePaths}
-                countyPath={countyPath}
-                heatMapConfig={heatMapConfigs[heatMapView]}
-            />
-            <HeatMapLegend
-                leftMargin={100}
-                heatMapConfig={heatMapConfigs[heatMapView]}
-            />
+            <div className="map-container" style={{width:400}}>
+                <StateMap 
+                    statePaths={statePaths}
+                    countyPath={countyPath}
+                    heatMapConfig={heatMapConfigs[heatMapView]}
+                />
+                <HeatMapLegend
+                    leftMargin={50}
+                    heatMapConfig={heatMapConfigs[heatMapView]}
+                />
+            </div>
         </div>
     )
 }
