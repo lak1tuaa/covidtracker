@@ -19,6 +19,8 @@ function StateMap(props) {
                                     fill="lightgrey"
                                     stroke="black"
                                     strokeWidth=".1"
+                                    data-tip={d.statename}
+                                    data-for="svgTooltipState"
                                 />
                             </Link>
                         )
