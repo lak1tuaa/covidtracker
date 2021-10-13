@@ -9,3 +9,8 @@
     margin:0 auto;
     margin-top:20px;
 }
+
+/* For Google Chrome to avoid black outline when switching states */
+*,*:focus,*:hover{
+    outline:none;
+}
