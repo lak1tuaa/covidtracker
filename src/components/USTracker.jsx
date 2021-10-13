@@ -35,7 +35,7 @@ function USTracker() {
   }, []);
   
   return (
-    <div className="container">
+    <div className="container tracker">
       <h1 className="title">United States COVID-19 Tracker</h1>
       <QuickInfo 
         vaccinations={vaccinations} 

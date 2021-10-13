@@ -50,7 +50,7 @@ function StateTracker() {
     }, [stateAbbr]);
 
     return (
-        <div className="container">
+        <div className="container tracker">
             <h1 className="title">{stateName} COVID-19 Tracker</h1>
             <QuickInfo 
                 lastUpdatedDate={lastUpdatedDate}
