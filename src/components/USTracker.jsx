@@ -3,8 +3,8 @@ import QuickInfo from './QuickInfo';
 import LineBarGraph from './LineBarGraph';
 import USHeatMap from './USHeatMap';
 import { fetchUSCovidData, fetchUSStateData, fetchUSTimeSeriesData } from '../api/CovidAPI';
-import { addRollingAverageToTimeSeriesData, parseDate, numberWithCommas } from './common/lib';
-import { abbrToState } from './maps/stateabbreviations';
+import { addRollingAverageToTimeSeriesData, parseDate, numberWithCommas } from '../common/lib';
+import { abbrToState } from '../maps/stateabbreviations';
 import SortableTable from './SortableTable';
 import './style/tracker.css';
 

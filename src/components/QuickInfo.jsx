@@ -1,5 +1,5 @@
 import React from 'react';
-import {numberWithCommas} from './common/lib';
+import {numberWithCommas} from '../common/lib';
 import './style/quickinfo.css';
 
 function QuickInfo(props) {

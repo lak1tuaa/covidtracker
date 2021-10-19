@@ -1,13 +1,13 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { abbrToState } from './maps/stateabbreviations';
+import { abbrToState } from '../maps/stateabbreviations';
 import { fetchStateTimeSeriesData, fetchStateData, fetchStateCounties } from '../api/CovidAPI';
 import StateHeatMap from './StateHeatMap'
 import QuickInfo from './QuickInfo';
 import LineBarGraph from './LineBarGraph';
 
-import { addRollingAverageToTimeSeriesData, parseDate, numberWithCommas } from './common/lib';
+import { addRollingAverageToTimeSeriesData, parseDate, numberWithCommas } from '../common/lib';
 import SortableTable from './SortableTable';
 import './style/tracker.css';
 import { propTypes } from 'react-bootstrap/esm/Image';

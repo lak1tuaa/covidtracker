@@ -2,18 +2,18 @@ import React from 'react';
 import {useEffect, useState} from 'react';
 
 import {geoPath, geoMercator} from 'd3';
-import {stateCodeTofips, stateToAbbr} from './maps/stateabbreviations';
+import {stateCodeTofips, stateToAbbr} from '../maps/stateabbreviations';
 import HeatMapButtons from './HeatMapButtons';
 import StateMap from './StateMap';
 import HeatMapLegend from './HeatMapLegend';
-import { heatMapConfigs } from './config/heatmapconfig';
+import { heatMapConfigs } from '../config/heatmapconfig';
 import './style/heatmap.css';
 
 function StateHeatMap(props) {
     const [heatMapView, setHeatMapView] = useState('newcases');
 
-    const allStatesGeoJsonData = require('./geojson/gz_2010_us_040_00_20m.json');
-    const allCountiesGeoJsonData = require('./geojson/gz_2010_us_050_00_20m.json');
+    const allStatesGeoJsonData = require('../geojson/gz_2010_us_040_00_20m.json');
+    const allCountiesGeoJsonData = require('../geojson/gz_2010_us_050_00_20m.json');
 
     const fipsCode = stateCodeTofips[props.state];
     const stateCountiesGeoJson = allCountiesGeoJsonData.features.filter((d) => d.properties.STATE === fipsCode);
