@@ -67,3 +67,7 @@ app.get('/api/state/:stateAbbr/county', (req, res) => {
     fetchData(`https://api.covidactnow.org/v2/county/${stateAbbr}.json?apiKey=${apiKey}`)
         .then(json => res.json(json))
 })
+
+app.get('/*', (req, res) => {
+    res.sendFile(path.join(__dirname,'build','index.html'));
+})
